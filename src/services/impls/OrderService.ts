@@ -3,8 +3,10 @@ import PrismaUtil from '../../utils/PrismaUtil';
 import Service from '../Service';
 
 export default class OrderService implements Service<Order> {
-	getAllByParentId = async (userId: number, page: number, limit: number): Promise<Order[] | null> => {
+	getAllByParentId = async (requestBody: any, page: number, limit: number): Promise<Order[] | null> => {
 		let response: Order[] | null = null;
+		const { userId } = requestBody;
+
 		const query = {
 			where: {
 				userId: userId,

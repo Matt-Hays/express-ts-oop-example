@@ -16,7 +16,7 @@ export default class ProductRoute extends Route<Product> {
 		this.getRouter().use('/', this.getAll);
 	}
 
-	getAll = async (req: Request, res: Response) => {
+	getAll = async (req: Request, res: Response): Promise<void> => {
 		const clientResponse: ClientResponse<Product[]> = { data: null };
 
 		try {

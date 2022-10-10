@@ -1,5 +1,5 @@
 import { User } from '@prisma/client';
-import { RouterOptions, Router, Request, Response } from 'express';
+import { RouterOptions, Router } from 'express';
 import Service from '../services/Service';
 import Route from './Route';
 
