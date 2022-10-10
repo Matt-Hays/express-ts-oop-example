@@ -1,15 +1,15 @@
 import { Order } from '@prisma/client';
 import PrismaUtil from '../../utils/PrismaUtil';
-import Service from '../Service';
+import Service, { RequestBody } from '../Service';
 
 export default class OrderService implements Service<Order> {
-	getAllByParentId = async (requestBody: any, page: number, limit: number): Promise<Order[] | null> => {
+	getAllByParentId = async (requestBody: RequestBody, page: number, limit: number): Promise<Order[] | null> => {
 		let response: Order[] | null = null;
 		const { userId } = requestBody;
 
 		const query = {
 			where: {
-				userId: userId,
+				userId: userId!,
 			},
 			include: {
 				products: true,
@@ -51,16 +51,16 @@ export default class OrderService implements Service<Order> {
 		}
 	};
 
-	create = async (requestBody: any): Promise<Order | null> => {
+	create = async (requestBody: RequestBody): Promise<Order | null> => {
 		let response: Order | null = null;
 		const { order } = requestBody;
 
 		const insertStmt = {
 			data: {
 				products: {
-					connect: order.products,
+					connect: order!.products,
 				},
-				userId: order.userId,
+				userId: order!.userId,
 			},
 			include: {
 				products: true,

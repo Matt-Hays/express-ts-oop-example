@@ -1,6 +1,6 @@
 import { User } from '@prisma/client';
 import PrismaUtil from '../../utils/PrismaUtil';
-import Service from '../Service';
+import Service, { RequestBody } from '../Service';
 
 export default class UserService implements Service<User> {
 	get = async (id: number): Promise<User | null> => {
@@ -25,8 +25,8 @@ export default class UserService implements Service<User> {
 		}
 	};
 
-	create = async (requestBody: any): Promise<User | null> => {
-		const { address, ...userBody } = requestBody.user;
+	create = async (requestBody: RequestBody): Promise<User | null> => {
+		const { address, ...userBody } = requestBody.user!;
 		let response: User | null = null;
 
 		const insertStmt = {
@@ -50,7 +50,7 @@ export default class UserService implements Service<User> {
 		}
 	};
 
-	update = async (requestBody: any): Promise<User | null> => {
+	update = async (requestBody: RequestBody): Promise<User | null> => {
 		throw new Error('Method not implemented.');
 	};
 

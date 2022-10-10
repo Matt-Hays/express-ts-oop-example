@@ -1,6 +1,6 @@
 import { Product } from '@prisma/client';
 import PrismaUtil from '../../utils/PrismaUtil';
-import Service from '../Service';
+import Service, { RequestBody } from '../Service';
 
 export default class ProductService implements Service<Product> {
 	getAll = async (page: number, limit: number): Promise<Product[] | null> => {
@@ -35,12 +35,12 @@ export default class ProductService implements Service<Product> {
 		}
 	};
 
-	create = async (requestBody: any): Promise<Product | null> => {
+	create = async (requestBody: RequestBody): Promise<Product | null> => {
 		let response: Product | null = null;
 		const { product } = requestBody;
 
 		const insertStmt = {
-			data: product,
+			data: product!,
 		};
 
 		try {
@@ -55,7 +55,7 @@ export default class ProductService implements Service<Product> {
 		}
 	};
 
-	update = async (requestBody: any): Promise<Product | null> => {
+	update = async (requestBody: RequestBody): Promise<Product | null> => {
 		let response: Product | null = null;
 		const { product } = requestBody;
 
@@ -63,9 +63,9 @@ export default class ProductService implements Service<Product> {
 			await PrismaUtil.prismaClient.$connect();
 			response = await PrismaUtil.prismaClient.product.update({
 				where: {
-					id: product.id,
+					id: product!.id,
 				},
-				data: product,
+				data: product!,
 			});
 		} catch (e) {
 			// Log the error chain
