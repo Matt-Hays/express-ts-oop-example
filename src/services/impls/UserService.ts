@@ -26,14 +26,12 @@ export default class UserService implements Service<User> {
 	};
 
 	create = async (requestBody: any): Promise<User | null> => {
-		const { user } = requestBody;
-		const { address } = user;
-		delete user.address;
+		const { address, ...userBody } = requestBody.user;
 		let response: User | null = null;
 
 		const insertStmt = {
 			data: {
-				...user,
+				...userBody,
 				address: {
 					create: address,
 				},
