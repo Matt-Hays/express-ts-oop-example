@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique @db.VarChar(255)
+  passwordHash String   @db.VarChar(255)
+  firstName    String   @db.VarChar(255)
+  lastName     String   @db.VarChar(255)
+  phone        String   @db.VarChar(255)
+  address      Address?
+  Order        Order[]
+}
+
+model Address {
+  id      Int    @id @default(autoincrement())
+  street1 String @db.VarChar(255)
+  street2 String @db.VarChar(255)
+  city    String @db.VarChar(255)
+  state   String @db.VarChar(2)
+  zipCode Int
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  Int    @unique
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  category    Category
+  sku         String   @db.VarChar(255)
+  name        String   @db.VarChar(255)
+  description String   @db.Text
+  imagePath   String   @db.VarChar(255)
+  quantity    Int      @default(0)
+  price       Decimal  @db.Decimal(6, 2)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  Order       Order?   @relation(fields: [orderId], references: [id], onDelete: NoAction)
+  orderId     Int?
+}
+
+enum Category {
+  OUTDOORS
+  SPORTS
+  INTERIOR
+  BBQ
+}
+
+model Order {
+  id       Int       @id @default(autoincrement())
+  products Product[]
+  user     User      @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userId   Int
+}
