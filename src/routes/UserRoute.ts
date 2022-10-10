@@ -1,7 +1,7 @@
 import { User } from '@prisma/client';
 import { RouterOptions, Router, Request, Response } from 'express';
-import Service from '../../services/Service';
-import Route from '../Route';
+import Service from '../services/Service';
+import Route from './Route';
 
 /**
  * The User Domain Controller.

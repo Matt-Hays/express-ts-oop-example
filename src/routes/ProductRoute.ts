@@ -1,7 +1,7 @@
 import { Product } from '@prisma/client';
 import { RouterOptions, Router, Request, Response } from 'express';
-import Service from '../../services/Service';
-import Route, { ClientResponse } from '../Route';
+import Service from '../services/Service';
+import Route, { ClientResponse } from './Route';
 
 /**
  * The Product Domain Controller.

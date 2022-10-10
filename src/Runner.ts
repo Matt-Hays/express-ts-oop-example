@@ -1,9 +1,9 @@
 import bodyParser from 'body-parser';
 import express, { Express, RequestHandler, Router } from 'express';
 import { Server } from 'http';
-import OrderRoute from './routes/impls/OrderRoute';
-import ProductRoute from './routes/impls/ProductRoute';
-import UserRoute from './routes/impls/UserRoute';
+import OrderRoute from './routes/OrderRoute';
+import ProductRoute from './routes/ProductRoute';
+import UserRoute from './routes/UserRoute';
 import ProductService from './services/impls/ProductService';
 import UserService from './services/impls/UserService';
 import OrderService from './services/impls/OrderService';

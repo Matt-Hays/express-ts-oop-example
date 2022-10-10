@@ -1,7 +1,7 @@
 import { Order } from '@prisma/client';
 import { RouterOptions, Router } from 'express';
-import Service from '../../services/Service';
-import Route from '../Route';
+import Service from '../services/Service';
+import Route from './Route';
 
 /**
  * The Order Domain Controller.
