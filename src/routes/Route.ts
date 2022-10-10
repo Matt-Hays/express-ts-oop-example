@@ -5,7 +5,7 @@ import Service from '../services/Service';
  * The parent / super class for all routes.
  * Provides generic controller-level function for select CRUD operations.
  */
-export default abstract class Route<T> {
+export default class Route<T> {
 	readonly #basePath: string;
 	readonly #service: Service<T>;
 	readonly #router: Router;
