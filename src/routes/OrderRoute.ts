@@ -1,5 +1,5 @@
 import { Order } from '@prisma/client';
-import { RouterOptions, Router, Request, Response, response } from 'express';
+import { RouterOptions, Router, Request, Response } from 'express';
 import Service from '../services/Service';
 import Route, { ClientResponse } from './Route';
 
