@@ -27,17 +27,15 @@ export default class UserService implements Service<User> {
 
 	create = async (requestBody: any): Promise<User | null> => {
 		const { user } = requestBody;
+		const { address } = user;
+		delete user.address;
 		let response: User | null = null;
 
 		const insertStmt = {
 			data: {
-				email: user.email,
-				passwordHash: user.passwordHash,
-				firstName: user.firstName,
-				lastName: user.lastName,
-				phone: user.phone,
+				...user,
 				address: {
-					create: user.address,
+					create: address,
 				},
 			},
 		};
