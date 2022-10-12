@@ -1,0 +1,33 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    env_file:
+      - db.env
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - '8080:8080'
+    volumes:
+      - logs:/app/logs
+      - ./:/app
+      - /app/node_modules
+    env_file:
+      - .env
+    depends_on:
+      - db
+    command: sh -c "npx prisma migrate dev && npx prisma generate && npm run build && npm run start"
+
+volumes:
+  db:
+  logs:

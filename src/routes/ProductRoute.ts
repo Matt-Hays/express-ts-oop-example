@@ -13,7 +13,7 @@ export default class ProductRoute extends Route<Product> {
 	}
 
 	#addRouteToRouter() {
-		this.getRouter().use('/', this.getAll);
+		this.getRouter().get('/', this.getAll);
 	}
 
 	getAll = async (req: Request, res: Response): Promise<void> => {

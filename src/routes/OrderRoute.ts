@@ -13,7 +13,7 @@ export default class OrderRoute extends Route<Order> {
 	}
 
 	#addRouteToRouter() {
-		this.getRouter().use('/', this.getAllByParentId);
+		this.getRouter().get('/', this.getAllByParentId);
 	}
 
 	getAllByParentId = async (req: Request, res: Response): Promise<void> => {
